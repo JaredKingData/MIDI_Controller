@@ -1,18 +1,5 @@
 /*
-  Made by Gustavo Silveira, 2023.
-  - This Sketch reads the Arduino's digital and analog ports and send midi notes and midi control change
-
-  http://www.musiconerd.com
-  http://www.youtube.com/musiconerd
-  http://facebook.com/musiconerdmusiconerd
-  http://instagram.com/musiconerd/
-  http://www.gustavosilveira.net
-  gustavosilveira@musiconerd.com
-
-  If you are using for anything that's not for personal use don't forget to give credit.
-
-  PS: Just change the value that has a comment like " // "
-
+  Made by Jared King, 2024.
 */
 
 /////////////////////////////////////////////
@@ -24,7 +11,7 @@
 // "DEBUG" if you just want to debug the code in the serial monitor
 // you don't need to comment or uncomment any MIDI library below after you define your board
 
-#define DEBUG 1  // put here the uC you are using, like in the lines above followed by "1", like "ATMEGA328 1", "DEBUG 1", etc.
+#define ATMEGA328 1  // put here the uC you are using, like in the lines above followed by "1", like "ATMEGA328 1", "DEBUG 1", etc.
 
 /////////////////////////////////////////////
 // Are you using buttons?
@@ -41,7 +28,7 @@
 // if using with ATmega328 - Uno, Mega, Nano...
 #ifdef ATMEGA328
 #include <MIDI.h>  // by Francois Best
-//MIDI_CREATE_DEFAULT_INSTANCE();
+MIDI_CREATE_DEFAULT_INSTANCE();
 
 // if using with ATmega32U4 - Micro, Pro Micro, Leonardo...
 #elif ATMEGA32U4
@@ -107,7 +94,7 @@ int potMax = 1023;
 
 /////////////////////////////////////////////
 // MIDI
-byte midiCh = 0;  // MIDI channel to be used - start with 1 for MIDI.h lib or 0 for MIDIUSB lib
+byte midiCh = 1;  // MIDI channel to be used - start with 1 for MIDI.h lib or 0 for MIDIUSB lib
 byte note = 36;   // Lowest note to be used
 byte cc = 1;      // Lowest MIDI CC to be used
 
@@ -325,4 +312,5 @@ void controlChange(byte channel, byte control, byte value) {
   MidiUSB.sendMIDI(event);
 }
 #endif
+
 
